@@ -71,14 +71,13 @@ public class DemoApplicationTests {
   @Test
   public void aggregate_save_multiple_each() {
 
-    Arrays.asList(AggregateEntity.create("a1"), AggregateEntity.create("a2"))
-        .forEach(aggregateEntityRepository::save);
+    AggregateEntity e1 = AggregateEntity.create("a1");
+    AggregateEntity e2 = AggregateEntity.create("a2");
 
-    List<AggregateEntity> actual = aggregateEntityRepository.findAll();
+    Arrays.asList(e1, e2).forEach(aggregateEntityRepository::save);
 
-    assertThat(actual, iterableWithSize(2));
-    assertThat(actual.get(0).getId(), is(notNullValue()));
-    assertThat(actual.get(1).getId(), is(notNullValue()));
+    assertThat(e1.getId(), is(notNullValue()));
+    assertThat(e2.getId(), is(notNullValue()));
   }
 
   @Test
@@ -108,13 +107,11 @@ public class DemoApplicationTests {
   @Test
   public void my_aggregate_save_multiple_each() {
 
-    Arrays.asList(MyAggregateEntity.create("ma1"), MyAggregateEntity.create("ma2"))
-        .forEach(myAggregateEntityRepository::save);
+    MyAggregateEntity e1 = MyAggregateEntity.create("ma1");
+    MyAggregateEntity e2 = MyAggregateEntity.create("ma2");
+    Arrays.asList(e1, e2).forEach(myAggregateEntityRepository::save);
 
-    List<MyAggregateEntity> actual = myAggregateEntityRepository.findAll();
-
-    assertThat(actual, iterableWithSize(2));
-    assertThat(actual.get(0).getId(), is(notNullValue()));
-    assertThat(actual.get(1).getId(), is(notNullValue()));
+    assertThat(e1.getId(), is(notNullValue()));
+    assertThat(e2.getId(), is(notNullValue()));
   }
 }
